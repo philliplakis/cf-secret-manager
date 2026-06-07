@@ -35,3 +35,4 @@ coverage/
 *.tsbuildinfo
 dev.vars
 .wrangler
+.vitepress/

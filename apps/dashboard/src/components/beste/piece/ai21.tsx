@@ -10,7 +10,14 @@ interface Ai21Props {
 
 export function Ai21({ label = 'API_KEY', value, className }: Ai21Props) {
   const [shown, setShown] = useState(false);
+  const [copied, setCopied] = useState(false);
   const masked = value.slice(0, 3) + '•'.repeat(Math.max(8, value.length - 3));
+
+  async function handleCopy() {
+    await navigator.clipboard.writeText(value);
+    setCopied(true);
+    window.setTimeout(() => setCopied(false), 2000);
+  }
 
   return (
     <div className={cn('relative flex size-full items-center justify-center', className)}>
@@ -33,8 +40,9 @@ export function Ai21({ label = 'API_KEY', value, className }: Ai21Props) {
           </button>
           <button
             type="button"
+            onClick={handleCopy}
             className="flex size-6 items-center justify-center rounded text-muted-foreground hover:bg-muted hover:text-foreground"
-            aria-label="Copy"
+            aria-label={copied ? 'Copied' : 'Copy'}
           >
             <Copy className="size-3.5" />
           </button>
