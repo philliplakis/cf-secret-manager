@@ -1,0 +1,21 @@
+{
+  "name": "cfsm",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "bin": {
+    "cfsm": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "typecheck": "tsgo --noEmit",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@cfsm/typescript-sdk": "workspace:*"
+  },
+  "devDependencies": {
+    "@cfsm/tsconfig": "workspace:*"
+  }
+}

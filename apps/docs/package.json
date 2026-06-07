@@ -1,0 +1,15 @@
+{
+  "name": "@cfsm/docs",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "vitepress build",
+    "dev": "vitepress dev",
+    "preview": "vitepress preview",
+    "clean": "rm -rf .vitepress/dist"
+  },
+  "devDependencies": {
+    "vitepress": "^1.6.3"
+  }
+}

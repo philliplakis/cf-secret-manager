@@ -1,0 +1,26 @@
+{
+  "name": "cf-secret-manager",
+  "private": true,
+  "workspaces": ["apps/*", "packages/*", "tooling/*"],
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev --filter='./apps/*'",
+    "lint": "turbo run lint",
+    "typecheck": "turbo run typecheck",
+    "test": "turbo run test",
+    "clean": "turbo run clean && rm -rf node_modules",
+    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md,svelte}\"",
+    "seed": "bun scripts/seed.ts",
+    "release": "bun scripts/release.ts"
+  },
+  "devDependencies": {
+    "@cfsm/prettier-config": "workspace:*",
+    "@cfsm/tsconfig": "workspace:*",
+    "@types/node": "^22.15.21",
+    "@typescript/native-preview": "^7.0.0-dev.20260606.1",
+    "prettier": "^3.5.3",
+    "turbo": "^2.5.4",
+    "typescript": "^6.0.3"
+  },
+  "packageManager": "bun@1.3.14"
+}
