@@ -3,16 +3,25 @@ import { SidebarInset, SidebarProvider, SidebarTrigger } from '@/components/ui/s
 import { Separator } from '@/components/ui/separator';
 import { AppSidebar } from '@/components/app-sidebar';
 import { useMainStore } from '@/state/main';
+import { authClient } from '@/lib/auth-client';
+
 type RouteHandle = {
   title?: string;
 };
 
 export function DashboardLayout() {
   const { isAuthenticated } = useMainStore();
+  const { data: session, isPending } = authClient.useSession();
 
-  if (!isAuthenticated) {
+  if (isPending) {
+    return <div>Loading...</div>;
+  }
+
+  if (!isAuthenticated || !session) {
     return <Navigate to="/login" />;
   }
+
+  console.log(session);
 
   const matches = useMatches();
   const match = [...matches]
