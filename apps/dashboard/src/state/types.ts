@@ -1,3 +1,3 @@
 export type MainStore = {
-  isAuthenticated: boolean;
+  signOut: () => Promise<unknown>;
 };

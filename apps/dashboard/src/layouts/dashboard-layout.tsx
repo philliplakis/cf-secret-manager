@@ -2,7 +2,6 @@ import { Navigate, Outlet, useMatches } from 'react-router-dom';
 import { SidebarInset, SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar';
 import { Separator } from '@/components/ui/separator';
 import { AppSidebar } from '@/components/app-sidebar';
-import { useMainStore } from '@/state/main';
 import { authClient } from '@/lib/auth-client';
 
 type RouteHandle = {
@@ -10,20 +9,17 @@ type RouteHandle = {
 };
 
 export function DashboardLayout() {
-  const { isAuthenticated } = useMainStore();
+  const matches = useMatches();
   const { data: session, isPending } = authClient.useSession();
 
   if (isPending) {
     return <div>Loading...</div>;
   }
 
-  if (!isAuthenticated || !session) {
-    return <Navigate to="/login" />;
+  if (!session) {
+    return <Navigate to="/login" replace />;
   }
 
-  console.log(session);
-
-  const matches = useMatches();
   const match = [...matches]
     .reverse()
     .find((m) => Boolean((m.handle as RouteHandle | undefined)?.title));

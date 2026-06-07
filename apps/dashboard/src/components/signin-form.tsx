@@ -9,7 +9,6 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Field, FieldDescription, FieldError, FieldGroup, FieldLabel } from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
 import { authClient } from '@/lib/auth-client';
-import { useMainStore } from '@/state/main';
 
 const signinSchema = z.object({
   email: z.email('Enter a valid email address.'),
@@ -20,7 +19,7 @@ type SigninFormValues = z.infer<typeof signinSchema>;
 
 export function SigninForm({ ...props }: React.ComponentProps<typeof Card>) {
   const navigate = useNavigate();
-  const { isAuthenticated } = useMainStore();
+  const { data: session, isPending } = authClient.useSession();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const form = useForm<SigninFormValues>({
@@ -31,8 +30,12 @@ export function SigninForm({ ...props }: React.ComponentProps<typeof Card>) {
     },
   });
 
-  if (isAuthenticated) {
-    return <Navigate to="/dashboard" />;
+  if (isPending) {
+    return null;
+  }
+
+  if (session) {
+    return <Navigate to="/" replace />;
   }
 
   async function onSubmit(data: SigninFormValues) {
@@ -51,8 +54,7 @@ export function SigninForm({ ...props }: React.ComponentProps<typeof Card>) {
       return;
     }
 
-    useMainStore.setState({ isAuthenticated: true });
-    navigate('/dashboard');
+    navigate('/');
   }
 
   return (
