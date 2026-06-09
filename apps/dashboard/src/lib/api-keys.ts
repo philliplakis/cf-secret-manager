@@ -60,7 +60,6 @@ export function formatApiKeyExpiry(expiresAt: ApiKeyRecord['expiresAt']) {
 }
 
 export function formatApiKeyPreview(apiKey: ApiKeyRecord) {
-  const prefix = apiKey.prefix ?? API_KEY_PREFIX;
   const start = apiKey.start ?? '••••';
-  return `${prefix}${start}${'•'.repeat(12)}`;
+  return `${start}${'•'.repeat(12)}`;
 }

@@ -21,7 +21,11 @@ export const auth = betterAuth({
   emailAndPassword: {
     enabled: true,
   },
-  plugins: [apiKey()],
+  plugins: [
+    apiKey({
+      enableMetadata: true,
+    }),
+  ],
   trustedOrigins: ['http://localhost:5174'],
   user: {
     additionalFields: {

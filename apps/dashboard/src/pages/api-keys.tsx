@@ -41,6 +41,7 @@ export function ApiKeysPage() {
       },
     });
 
+    console.log(data);
     setIsLoading(false);
 
     if (error) {
